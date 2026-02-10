@@ -22,7 +22,7 @@ const config = {
         default: 'arcade', 
         arcade: { 
             gravity: { y: 0 } ,// Jogo Top-Down
-            debug: true
+            debug: false
         }
     },
     scene: [
