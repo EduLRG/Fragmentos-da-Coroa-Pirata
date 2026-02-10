@@ -6,6 +6,7 @@ export default class ResultadosScene extends Phaser.Scene {
     }
 
     preload() {
+        // Fundo e áudio do game over
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
         this.load.audio('gameover', 'assets/audio/gameover.mp3');
     }
@@ -15,6 +16,7 @@ export default class ResultadosScene extends Phaser.Scene {
         const score = this.scene.settings.data?.score ?? 0;
         const maxScore = this.scene.settings.data?.maxScore ?? 0;
 
+        // Parar música de fundo e tocar game over
         const bgm = this.sound.get('bgm');
         if (bgm && bgm.isPlaying) {
             bgm.stop();
@@ -24,7 +26,8 @@ export default class ResultadosScene extends Phaser.Scene {
         }
     this.sound.play('gameover', { volume: 0.2 });
 
-        const background = this.add.image(width / 2, height / 2, 'menuBackground');
+    // Fundo e painel
+    const background = this.add.image(width / 2, height / 2, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
         const scale = Math.max(scaleX, scaleY);
@@ -52,7 +55,8 @@ export default class ResultadosScene extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
-        const retryBtn = this.add.text(width / 2, height / 2 + 80, 'VOLTAR AO MENU', {
+    // Botão de voltar ao menu
+    const retryBtn = this.add.text(width / 2, height / 2 + 80, 'VOLTAR AO MENU', {
             fontSize: '30px',
             fill: '#ffffff',
             backgroundColor: '#1e88e5',

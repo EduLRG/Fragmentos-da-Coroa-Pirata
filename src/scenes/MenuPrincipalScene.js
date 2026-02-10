@@ -16,6 +16,8 @@ export default class MenuPrincipalScene extends Phaser.Scene {
         const centerX = width / 2;
         const centerY = height / 2; // 360
 
+        // Música de fundo (inicia no primeiro clique)
+
         const bgm = this.sound.get('bgm') || this.sound.add('bgm', { loop: true, volume: 0.25 });
         const startBgm = () => {
             if (this.sound.context.state === 'suspended') {
@@ -26,14 +28,14 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             }
         };
 
-        // --- 1. ADICIONAR E ESCALAR A IMAGEM DE FUNDO ---
+    // --- 1. ADICIONAR E ESCALAR A IMAGEM DE FUNDO ---
         const background = this.add.image(centerX, centerY, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
         const scale = Math.max(scaleX, scaleY); 
         background.setScale(scale);
 
-        // --- 2. TÍTULO ---
+    // --- 2. TÍTULO ---
         this.add.text(centerX, 150, 'FRAGMENTOS DA COROA PIRATA', { 
             fontSize: '60px', 
             fill: '#fcd34d', 
@@ -41,7 +43,7 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             strokeThickness: 10 
         }).setOrigin(0.5);
 
-        // --- 3. ESTILO DOS BOTÕES (Igual ao título) ---
+    // --- 3. ESTILO DOS BOTÕES (Igual ao título) ---
         const buttonStyle = { 
             fontSize: '40px', 
             fill: '#fcd34d', 
@@ -49,7 +51,7 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             strokeThickness: 8, 
         };
 
-        // --- 4. BOTÕES INTERATIVOS (Movidos para cima) ---
+    // --- 4. BOTÕES INTERATIVOS (Movidos para cima) ---
         let buttonY = centerY - 50; // Começa 50 pixels ACIMA do centro
 
         const startGame = () => {
@@ -62,18 +64,19 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             this.scene.start('Instrucoes');
         };
 
-        // NOVO JOGO
+    // NOVO JOGO
         const novoJogoBtn = this.add.text(centerX, buttonY, 'NOVO JOGO', buttonStyle).setOrigin(0.5)
             .setInteractive({ useHandCursor: true })
             .on('pointerdown', startGame);
 
-        // INSTRUÇÕES
+    // INSTRUÇÕES
         buttonY += 100; 
         const instrucoesBtn = this.add.text(centerX, buttonY, 'INSTRUÇÕES', buttonStyle).setOrigin(0.5)
             .setInteractive({ useHandCursor: true })
             .on('pointerdown', openInstructions);
 
-        this.input.once('pointerdown', startBgm);
+    // Ativa áudio após o primeiro toque/clique
+    this.input.once('pointerdown', startBgm);
 
         const menuButtons = [novoJogoBtn, instrucoesBtn];
         let selectedIndex = 0;

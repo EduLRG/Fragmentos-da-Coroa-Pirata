@@ -31,6 +31,7 @@ export default class GameScene extends Phaser.Scene {
 
     preload() {
         this.cursors = this.input.keyboard.createCursorKeys();
+        // Assets principais
 
         // Carregar a spritesheet do Capitão
         this.load.spritesheet('capitao', 'assets/images/capitao.png', { 
@@ -89,6 +90,7 @@ export default class GameScene extends Phaser.Scene {
         const { width, height } = this.sys.game.canvas;
         const hudX = width / 2;
         const hudY = height;
+        // Criação do mapa e entidades
         
         // --- 1. CRIAR O MAPA E CAMADAS ---
         this.cameras.main.setBackgroundColor('#000000'); 
@@ -200,7 +202,7 @@ export default class GameScene extends Phaser.Scene {
             this.pirates.add(rival);
         });
 
-        // --- 5. COLLECTIBLES ---
+    // --- 5. COLLECTIBLES ---
         const selectedKeySpawn = this.level === 2
             ? pickRandomSpawns(keySpawns, 1)[0]
             : keySpawns[0];
@@ -231,7 +233,7 @@ export default class GameScene extends Phaser.Scene {
             this.coins.add(coin);
         });
         
-        // --- 6. LIGAÇÃO DE COLISÕES ---
+    // --- 6. LIGAÇÃO DE COLISÕES ---
         
         this.physics.add.collider(this.player, collisionGroup);
         this.physics.add.collider(this.pirates, collisionGroup);
@@ -371,6 +373,7 @@ export default class GameScene extends Phaser.Scene {
     // --- UPDATE ---
 
     update() {
+        // Movimento e IA por frame
         const activeCursors = this.getActiveCursors();
         this.player.updateMovement(activeCursors);
         

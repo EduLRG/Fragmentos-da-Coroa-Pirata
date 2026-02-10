@@ -5,6 +5,7 @@ const SCALE_FACTOR = 3;
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
+        // Sprite principal do jogador
         // Frame 7 é o frame de repouso (virado para baixo)
         super(scene, x, y, 'capitao', 7);
         
@@ -33,6 +34,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     updateMovement(cursors) {
+        // Atualiza movimento com base nas teclas/joystick
         this.setVelocity(0); 
         let isMoving = false;
         this.setFlipX(false);

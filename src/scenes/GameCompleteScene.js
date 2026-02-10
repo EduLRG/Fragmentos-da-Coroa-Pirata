@@ -6,6 +6,7 @@ export default class GameCompleteScene extends Phaser.Scene {
     }
 
     preload() {
+        // Fundo padrão do jogo
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
     }
 
@@ -14,6 +15,7 @@ export default class GameCompleteScene extends Phaser.Scene {
         const score = this.scene.settings.data?.score ?? 0;
         const maxScore = this.scene.settings.data?.maxScore ?? 0;
 
+        // Fundo e painel
         const background = this.add.image(width / 2, height / 2, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
@@ -47,7 +49,8 @@ export default class GameCompleteScene extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
-        const menuBtn = this.add.text(width / 2, height / 2 + 90, 'VOLTAR AO MENU', {
+    // Botão para voltar ao menu
+    const menuBtn = this.add.text(width / 2, height / 2 + 90, 'VOLTAR AO MENU', {
             fontSize: '28px',
             fill: '#ffffff',
             backgroundColor: '#1e88e5',

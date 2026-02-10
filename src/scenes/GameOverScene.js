@@ -7,11 +7,13 @@ export default class GameOverScene extends Phaser.Scene {
     
     preload() {
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
+        // Sem assets extra por agora
     }
     
     create() {
         const { width, height } = this.sys.game.canvas;
         const background = this.add.image(width / 2, height / 2, 'menuBackground');
+    // Mensagem simples de game over
         const scaleX = width / background.width;
         const scaleY = height / background.height;
         const scale = Math.max(scaleX, scaleY);

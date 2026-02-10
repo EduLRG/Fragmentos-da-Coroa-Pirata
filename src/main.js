@@ -8,6 +8,7 @@ import GameOverScene from './scenes/GameOverScene.js';
 import ResultadosScene from './scenes/ResultadosScene.js';
 import GameCompleteScene from './scenes/GameCompleteScene.js';
 
+// Configuração principal do jogo
 const config = {
     type: Phaser.AUTO,
     title: 'Fragmentos da Coroa Pirata',

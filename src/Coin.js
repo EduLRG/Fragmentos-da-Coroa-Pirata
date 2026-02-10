@@ -5,6 +5,7 @@ const SCALE_FACTOR = 3;
 
 export default class Coin extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
+        // Item de moeda
         super(scene, x, y, 'coin');
 
         scene.add.existing(this);

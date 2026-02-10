@@ -9,6 +9,7 @@ const SCALE_FACTOR = 3;
 
 export default class Pirate extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, textureKey) {
+        // Inimigo com patrulha e perseguição
         // Usa a chave de textura dinâmica e o frame 7 (idle down)
         super(scene, x, y, textureKey, 7);
         
@@ -118,6 +119,7 @@ export default class Pirate extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(player) {
+        // IA simples: deteta jogador e persegue
         const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
         let chasing = false;
 

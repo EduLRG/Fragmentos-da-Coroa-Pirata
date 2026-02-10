@@ -6,11 +6,13 @@ export default class LevelCompleteScene extends Phaser.Scene {
     }
     
     preload() {
+        // Fundo padrão do jogo
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
     }
     
     create() {
         const { width, height } = this.sys.game.canvas;
+        // Fundo escalado
         const background = this.add.image(width / 2, height / 2, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
@@ -32,7 +34,8 @@ export default class LevelCompleteScene extends Phaser.Scene {
             fill: '#ffffff'
         }).setOrigin(0.5);
 
-        const button = this.add.text(width / 2, height / 2 + 80, 'NÍVEL SEGUINTE', {
+    // Botão para avançar
+    const button = this.add.text(width / 2, height / 2 + 80, 'NÍVEL SEGUINTE', {
             fontSize: '30px',
             fill: '#ffffff',
             backgroundColor: '#1e88e5',
