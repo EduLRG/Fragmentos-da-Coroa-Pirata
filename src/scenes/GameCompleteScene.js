@@ -1,30 +1,49 @@
-// scenes/GameCompleteScene.js
+// ============================================
+// Fragmentos da Coroa Pirata
+// Scene: GameCompleteScene
+// Autor: Eduardo Goncalves
+// ============================================
 
+// ============================================
+// CLASSE: GameCompleteScene
+// Mostra ecran final de vitoria.
+// ============================================
 export default class GameCompleteScene extends Phaser.Scene {
+    // ------------------------------------------
+    // METODO: constructor()
+    // Regista a chave da scene.
+    // ------------------------------------------
     constructor() {
         super('GameComplete');
     }
 
+    // ------------------------------------------
+    // METODO: preload()
+    // Carrega assets usados nesta scene.
+    // ------------------------------------------
     preload() {
-        // Fundo padrão do jogo
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
     }
 
+    // ------------------------------------------
+    // METODO: create()
+    // Mostra score final e opcao de voltar ao menu.
+    // ------------------------------------------
     create() {
         const { width, height } = this.sys.game.canvas;
         const score = this.scene.settings.data?.score ?? 0;
         const maxScore = this.scene.settings.data?.maxScore ?? 0;
 
-        // Fundo e painel
+        // ---------- FUNDO ----------
         const background = this.add.image(width / 2, height / 2, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
-        const scale = Math.max(scaleX, scaleY);
-        background.setScale(scale);
+        background.setScale(Math.max(scaleX, scaleY));
 
         this.add.rectangle(width / 2, height / 2, width * 0.75, height * 0.62, 0x000000, 0.65)
             .setStrokeStyle(3, 0xfcd34d, 0.9);
 
+        // ---------- TEXTO ----------
         this.add.text(width / 2, height / 2 - 140, 'PARABÉNS!', {
             fontSize: '60px',
             fill: '#fcd34d',
@@ -49,8 +68,8 @@ export default class GameCompleteScene extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
-    // Botão para voltar ao menu
-    const menuBtn = this.add.text(width / 2, height / 2 + 90, 'VOLTAR AO MENU', {
+        // ---------- ACAO ----------
+        const menuBtn = this.add.text(width / 2, height / 2 + 90, 'VOLTAR AO MENU', {
             fontSize: '28px',
             fill: '#ffffff',
             backgroundColor: '#1e88e5',
@@ -62,10 +81,9 @@ export default class GameCompleteScene extends Phaser.Scene {
         };
 
         menuBtn.on('pointerdown', goMenu);
-
-        this.input.keyboard.on('keydown-ENTER', goMenu);
-
         menuBtn.on('pointerover', () => menuBtn.setStyle({ backgroundColor: '#1565c0' }));
         menuBtn.on('pointerout', () => menuBtn.setStyle({ backgroundColor: '#1e88e5' }));
+
+        this.input.keyboard.on('keydown-ENTER', goMenu);
     }
 }

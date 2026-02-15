@@ -1,22 +1,41 @@
-// scenes/ResultadosScene.js
+// ============================================
+// Fragmentos da Coroa Pirata
+// Scene: ResultadosScene
+// Autor: Eduardo Goncalves
+// ============================================
 
+// ============================================
+// CLASSE: ResultadosScene
+// Mostra ecran de derrota e score obtido.
+// ============================================
 export default class ResultadosScene extends Phaser.Scene {
+    // ------------------------------------------
+    // METODO: constructor()
+    // Regista a chave da scene.
+    // ------------------------------------------
     constructor() {
         super('Resultados');
     }
 
+    // ------------------------------------------
+    // METODO: preload()
+    // Carrega imagem de fundo e som de game over.
+    // ------------------------------------------
     preload() {
-        // Fundo e áudio do game over
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
         this.load.audio('gameover', 'assets/audio/gameover.mp3');
     }
 
+    // ------------------------------------------
+    // METODO: create()
+    // Mostra resultado final e retorno ao menu.
+    // ------------------------------------------
     create() {
         const { width, height } = this.sys.game.canvas;
         const score = this.scene.settings.data?.score ?? 0;
         const maxScore = this.scene.settings.data?.maxScore ?? 0;
 
-        // Parar música de fundo e tocar game over
+        // ---------- AUDIO ----------
         const bgm = this.sound.get('bgm');
         if (bgm && bgm.isPlaying) {
             bgm.stop();
@@ -24,18 +43,18 @@ export default class ResultadosScene extends Phaser.Scene {
         if (this.sound.context.state === 'suspended') {
             this.sound.context.resume();
         }
-    this.sound.play('gameover', { volume: 0.2 });
+        this.sound.play('gameover', { volume: 0.2 });
 
-    // Fundo e painel
-    const background = this.add.image(width / 2, height / 2, 'menuBackground');
+        // ---------- FUNDO ----------
+        const background = this.add.image(width / 2, height / 2, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
-        const scale = Math.max(scaleX, scaleY);
-        background.setScale(scale);
+        background.setScale(Math.max(scaleX, scaleY));
 
         this.add.rectangle(width / 2, height / 2, width * 0.72, height * 0.6, 0x000000, 0.65)
             .setStrokeStyle(3, 0xef4444, 0.9);
 
+        // ---------- TEXTO ----------
         this.add.text(width / 2, height / 2 - 130, 'RESULTADOS', {
             fontSize: '56px',
             fill: '#fcd34d',
@@ -55,8 +74,8 @@ export default class ResultadosScene extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
-    // Botão de voltar ao menu
-    const retryBtn = this.add.text(width / 2, height / 2 + 80, 'VOLTAR AO MENU', {
+        // ---------- ACAO ----------
+        const retryBtn = this.add.text(width / 2, height / 2 + 80, 'VOLTAR AO MENU', {
             fontSize: '30px',
             fill: '#ffffff',
             backgroundColor: '#1e88e5',
@@ -68,10 +87,9 @@ export default class ResultadosScene extends Phaser.Scene {
         };
 
         retryBtn.on('pointerdown', goMenu);
-
-        this.input.keyboard.on('keydown-ENTER', goMenu);
-
         retryBtn.on('pointerover', () => retryBtn.setStyle({ backgroundColor: '#1565c0' }));
         retryBtn.on('pointerout', () => retryBtn.setStyle({ backgroundColor: '#1e88e5' }));
+
+        this.input.keyboard.on('keydown-ENTER', goMenu);
     }
 }

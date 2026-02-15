@@ -1,23 +1,41 @@
-// scenes/MenuPrincipalScene.js
+// ============================================
+// Fragmentos da Coroa Pirata
+// Scene: MenuPrincipalScene
+// Autor: Eduardo Goncalves
+// ============================================
 
+// ============================================
+// CLASSE: MenuPrincipalScene
+// Gere o menu inicial e navegacao principal.
+// ============================================
 export default class MenuPrincipalScene extends Phaser.Scene {
+    // ------------------------------------------
+    // METODO: constructor()
+    // Regista a chave da scene.
+    // ------------------------------------------
     constructor() {
-        super('MenuPrincipal'); 
+        super('MenuPrincipal');
     }
 
+    // ------------------------------------------
+    // METODO: preload()
+    // Carrega imagem de fundo e musica.
+    // ------------------------------------------
     preload() {
-       // Carrega a imagem de fundo
-       this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
-         this.load.audio('bgm', 'assets/audio/song2.mp3');
+        this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
+        this.load.audio('bgm', 'assets/audio/song2.mp3');
     }
 
+    // ------------------------------------------
+    // METODO: create()
+    // Constroi layout do menu e eventos de input.
+    // ------------------------------------------
     create() {
-        const { width, height } = this.sys.game.canvas; 
+        const { width, height } = this.sys.game.canvas;
         const centerX = width / 2;
-        const centerY = height / 2; // 360
+        const centerY = height / 2;
 
-        // Música de fundo (inicia no primeiro clique)
-
+        // ---------- AUDIO ----------
         const bgm = this.sound.get('bgm') || this.sound.add('bgm', { loop: true, volume: 0.25 });
         const startBgm = () => {
             if (this.sound.context.state === 'suspended') {
@@ -28,31 +46,29 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             }
         };
 
-    // --- 1. ADICIONAR E ESCALAR A IMAGEM DE FUNDO ---
+        // ---------- FUNDO ----------
         const background = this.add.image(centerX, centerY, 'menuBackground');
         const scaleX = width / background.width;
         const scaleY = height / background.height;
-        const scale = Math.max(scaleX, scaleY); 
-        background.setScale(scale);
+        background.setScale(Math.max(scaleX, scaleY));
 
-    // --- 2. TÍTULO ---
-        this.add.text(centerX, 150, 'FRAGMENTOS DA COROA PIRATA', { 
-            fontSize: '60px', 
-            fill: '#fcd34d', 
-            stroke: '#8d6e63', 
-            strokeThickness: 10 
+        // ---------- TITULO ----------
+        this.add.text(centerX, 150, 'FRAGMENTOS DA COROA PIRATA', {
+            fontSize: '60px',
+            fill: '#fcd34d',
+            stroke: '#8d6e63',
+            strokeThickness: 10
         }).setOrigin(0.5);
 
-    // --- 3. ESTILO DOS BOTÕES (Igual ao título) ---
-        const buttonStyle = { 
-            fontSize: '40px', 
-            fill: '#fcd34d', 
-            stroke: '#8d6e63', 
-            strokeThickness: 8, 
+        // ---------- BOTOES ----------
+        const buttonStyle = {
+            fontSize: '40px',
+            fill: '#fcd34d',
+            stroke: '#8d6e63',
+            strokeThickness: 8
         };
 
-    // --- 4. BOTÕES INTERATIVOS (Movidos para cima) ---
-        let buttonY = centerY - 50; // Começa 50 pixels ACIMA do centro
+        let buttonY = centerY - 50;
 
         const startGame = () => {
             startBgm();
@@ -64,20 +80,20 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             this.scene.start('Instrucoes');
         };
 
-    // NOVO JOGO
-        const novoJogoBtn = this.add.text(centerX, buttonY, 'NOVO JOGO', buttonStyle).setOrigin(0.5)
+        const novoJogoBtn = this.add.text(centerX, buttonY, 'NOVO JOGO', buttonStyle)
+            .setOrigin(0.5)
             .setInteractive({ useHandCursor: true })
             .on('pointerdown', startGame);
 
-    // INSTRUÇÕES
-        buttonY += 100; 
-        const instrucoesBtn = this.add.text(centerX, buttonY, 'INSTRUÇÕES', buttonStyle).setOrigin(0.5)
+        buttonY += 100;
+        const instrucoesBtn = this.add.text(centerX, buttonY, 'INSTRUÇÕES', buttonStyle)
+            .setOrigin(0.5)
             .setInteractive({ useHandCursor: true })
             .on('pointerdown', openInstructions);
 
-    // Ativa áudio após o primeiro toque/clique
-    this.input.once('pointerdown', startBgm);
+        this.input.once('pointerdown', startBgm);
 
+        // ---------- NAVEGACAO ----------
         const menuButtons = [novoJogoBtn, instrucoesBtn];
         let selectedIndex = 0;
 
@@ -113,7 +129,6 @@ export default class MenuPrincipalScene extends Phaser.Scene {
             }
         });
 
-        // Efeito visual (Hover)
         menuButtons.forEach((btn, index) => {
             btn.on('pointerover', () => {
                 selectedIndex = index;

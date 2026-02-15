@@ -1,16 +1,28 @@
-// Pirata/src/Key.js
-// Classe para o item Chave
+// ============================================
+// Fragmentos da Coroa Pirata
+// Classe: Key
+// Autor: Eduardo Goncalves
+// ============================================
 
-const SCALE_FACTOR = 1.2; 
+// ---------- CONSTANTES ----------
+const SCALE_FACTOR = 1.2;
 
+// ============================================
+// CLASSE: Key
+// Item colecionavel necessario para abrir
+// o tesouro.
+// ============================================
 export default class Key extends Phaser.Physics.Arcade.Sprite {
+    // ------------------------------------------
+    // METODO: constructor(scene, x, y)
+    // Cria o item de chave como corpo estatico.
+    // ------------------------------------------
     constructor(scene, x, y) {
-        // Item de chave
         super(scene, x, y, 'key');
-        
-        scene.add.existing(this);
-        scene.physics.add.existing(this, true); // O 'true' cria um corpo estático
 
-        this.setScale(SCALE_FACTOR); 
+        scene.add.existing(this);
+        scene.physics.add.existing(this, true);
+
+        this.setScale(SCALE_FACTOR);
     }
 }

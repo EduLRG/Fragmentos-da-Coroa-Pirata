@@ -1,29 +1,49 @@
-// scenes/GameOverScene.js
+// ============================================
+// Fragmentos da Coroa Pirata
+// Scene: GameOverScene
+// Autor: Eduardo Goncalves
+// ============================================
 
+// ============================================
+// CLASSE: GameOverScene
+// Ecran alternativo de derrota.
+// ============================================
 export default class GameOverScene extends Phaser.Scene {
+    // ------------------------------------------
+    // METODO: constructor()
+    // Regista a chave da scene.
+    // ------------------------------------------
     constructor() {
-        super('GameOver'); // Chave para iniciar esta Scene
+        super('GameOver');
     }
-    
+
+    // ------------------------------------------
+    // METODO: preload()
+    // Carrega assets usados nesta scene.
+    // ------------------------------------------
     preload() {
         this.load.image('menuBackground', 'assets/images/imagemBackground.jpg');
-        // Sem assets extra por agora
     }
-    
+
+    // ------------------------------------------
+    // METODO: create()
+    // Mostra ecran de derrota e retorno ao menu.
+    // ------------------------------------------
     create() {
         const { width, height } = this.sys.game.canvas;
+
+        // ---------- FUNDO ----------
         const background = this.add.image(width / 2, height / 2, 'menuBackground');
-    // Mensagem simples de game over
         const scaleX = width / background.width;
         const scaleY = height / background.height;
-        const scale = Math.max(scaleX, scaleY);
-        background.setScale(scale);
+        background.setScale(Math.max(scaleX, scaleY));
 
         this.add.rectangle(width / 2, height / 2, width * 0.7, height * 0.55, 0x000000, 0.65)
             .setStrokeStyle(3, 0xef4444, 0.9);
 
-        this.add.text(width / 2, height / 2 - 110, 'GAME OVER', { 
-            fontSize: '60px', 
+        // ---------- TEXTO ----------
+        this.add.text(width / 2, height / 2 - 110, 'GAME OVER', {
+            fontSize: '60px',
             fill: '#ef4444',
             stroke: '#3e2723',
             strokeThickness: 8
@@ -34,6 +54,7 @@ export default class GameOverScene extends Phaser.Scene {
             fill: '#ffffff'
         }).setOrigin(0.5);
 
+        // ---------- ACAO ----------
         const menuBtn = this.add.text(width / 2, height / 2 + 40, 'RETORNAR AO MENU', {
             fontSize: '30px',
             fill: '#FFFFFF',
@@ -44,10 +65,13 @@ export default class GameOverScene extends Phaser.Scene {
         menuBtn.on('pointerdown', () => {
             this.scene.start('MenuPrincipal');
         });
-
         menuBtn.on('pointerover', () => menuBtn.setScale(1.05));
         menuBtn.on('pointerout', () => menuBtn.setScale(1));
     }
-    
+
+    // ------------------------------------------
+    // METODO: update()
+    // Scene estatica; sem logica por frame.
+    // ------------------------------------------
     update() {}
 }

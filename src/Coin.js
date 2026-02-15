@@ -1,11 +1,22 @@
-// Pirata/src/Coin.js
-// Classe para gerir a moeda
+// ============================================
+// Fragmentos da Coroa Pirata
+// Classe: Coin
+// Autor: Eduardo Goncalves
+// ============================================
 
+// ---------- CONSTANTES ----------
 const SCALE_FACTOR = 3;
 
+// ============================================
+// CLASSE: Coin
+// Item colecionavel que incrementa a pontuacao.
+// ============================================
 export default class Coin extends Phaser.Physics.Arcade.Sprite {
+    // ------------------------------------------
+    // METODO: constructor(scene, x, y)
+    // Cria a moeda e configura o corpo fisico.
+    // ------------------------------------------
     constructor(scene, x, y) {
-        // Item de moeda
         super(scene, x, y, 'coin');
 
         scene.add.existing(this);
