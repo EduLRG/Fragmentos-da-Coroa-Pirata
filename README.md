@@ -50,34 +50,6 @@ The game includes **2 playable levels**, a full menu/flow system, score tracking
 
 - Virtual joystick (bottom-left corner)
 
-## Run Locally
-
-Because the project uses JavaScript modules, run it with a local server (do not open with `file://`).
-
-1. Clone the repository:
-
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd Ex_Phaser__Eduardo_Goncalves_20989.
-```
-
-2. Start a local HTTP server (choose one):
-
-```bash
-python3 -m http.server 8000
-```
-
-or
-
-```bash
-npx serve .
-```
-
-3. Open in your browser:
-
-```text
-http://localhost:8000
-```
 
 ## Project Structure
 
